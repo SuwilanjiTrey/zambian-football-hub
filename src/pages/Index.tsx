@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import BottomNav from "@/components/BottomNav";
 import HomeTab from "@/components/tabs/HomeTab";
 import ScoresTab from "@/components/tabs/ScoresTab";
@@ -9,12 +9,24 @@ import footballBg from "@/assets/football-bg.jpg";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const bgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (bgRef.current) {
+        const offset = window.scrollY * 0.3;
+        bgRef.current.style.transform = `translateY(${offset}px) scale(1.1)`;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background pb-20 relative">
-      {/* Background Image with Gradient Overlay */}
-      <div className="fixed inset-0 z-0">
-        <img src={footballBg} alt="" className="w-full h-full object-cover opacity-20" width={1080} height={1920} />
+      {/* Background Image with Parallax + Gradient Overlay */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <img ref={bgRef} src={footballBg} alt="" className="w-full h-full object-cover opacity-20 will-change-transform scale-110 transition-none" width={1080} height={1920} />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/90 to-background" />
       </div>
       {/* Header */}
