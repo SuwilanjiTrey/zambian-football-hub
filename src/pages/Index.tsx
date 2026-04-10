@@ -18,7 +18,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/90 to-background" />
       </div>
       {/* Header */}
-      <header className="sticky top-0 z-40 glass-card border-b border-border/50 px-4 py-3">
+      <header className="sticky top-0 z-40 glass-card border-b border-border/50 px-4 py-3 relative">
         <div className="flex items-center justify-between max-w-lg mx-auto">
           <div>
             <h1 className="font-display text-lg tracking-wider">
