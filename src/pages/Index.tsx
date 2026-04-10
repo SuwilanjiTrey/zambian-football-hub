@@ -38,7 +38,7 @@ const Index = () => {
       </header>
 
       {/* Content */}
-      <main className="max-w-lg mx-auto px-4 pt-4">
+      <main className="max-w-lg mx-auto px-4 pt-4 relative z-10">
         {activeTab === "home" && <HomeTab />}
         {activeTab === "scores" && <ScoresTab />}
         {activeTab === "teams" && <TeamsTab />}
