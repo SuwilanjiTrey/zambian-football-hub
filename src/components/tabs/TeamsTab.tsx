@@ -1,5 +1,10 @@
+import { useState } from "react";
 import TeamCard from "@/components/TeamCard";
+import PlayerCard from "@/components/PlayerCard";
+import PlayerProfile from "@/components/PlayerProfile";
 import SectionHeader from "@/components/SectionHeader";
+import { getPlayersByTeam, Player } from "@/data/players";
+import { ArrowLeft } from "lucide-react";
 
 const teams = [
   { name: "ZESCO UNITED", city: "Ndola", position: 1, points: 54, color: "hsl(145, 63%, 32%)" },
@@ -15,12 +20,45 @@ const teams = [
 ];
 
 const TeamsTab = () => {
+  const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
+  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
+
+  if (selectedPlayer) {
+    return <PlayerProfile player={selectedPlayer} onBack={() => setSelectedPlayer(null)} />;
+  }
+
+  if (selectedTeam) {
+    const teamPlayers = getPlayersByTeam(selectedTeam);
+    return (
+      <div className="space-y-4 animate-in slide-in-from-right-4 duration-200">
+        <button onClick={() => setSelectedTeam(null)} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+          <ArrowLeft size={18} />
+          <span className="text-xs font-body">Back to table</span>
+        </button>
+        <SectionHeader title={selectedTeam} />
+        {teamPlayers.length > 0 ? (
+          <div className="space-y-2">
+            {teamPlayers.map((player) => (
+              <PlayerCard key={player.id} player={player} onSelect={setSelectedPlayer} />
+            ))}
+          </div>
+        ) : (
+          <div className="glass-card rounded-xl p-6 text-center">
+            <p className="text-xs font-body text-muted-foreground">Squad data coming soon</p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <SectionHeader title="Super League Table" />
       <div className="space-y-2">
         {teams.map((team) => (
-          <TeamCard key={team.position} {...team} />
+          <div key={team.position} onClick={() => setSelectedTeam(team.name)} className="cursor-pointer">
+            <TeamCard {...team} />
+          </div>
         ))}
       </div>
     </div>
