@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  base: '/SuwilanjiTrey.github.io/zambian-football-hub/', // MUST match your GitHub repository name
+  base: '/suwilanjitrey.github.io/zambian-football-hub/', // MUST match your GitHub repository name
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
