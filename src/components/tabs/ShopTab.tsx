@@ -1,5 +1,7 @@
 import ShopCard from "@/components/ShopCard";
 import SectionHeader from "@/components/SectionHeader";
+import scarf from "@/assets/scarf.webp";
+import coach from "@/assets/coach.jpeg";
 
 const shopItems = [
   {
@@ -22,7 +24,7 @@ const shopItems = [
   {
     name: "CHIPOLOPOLO SCARF",
     price: "K120",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop",
+    image: scarf,
   },
   {
     name: "ZAMBIA TRAINING TOP",
@@ -33,7 +35,7 @@ const shopItems = [
   {
     name: "COPPER EAGLES CAP",
     price: "K95",
-    image: "https://images.unsplash.com/photo-1588850561407-ed78c334e67a?w=400&h=400&fit=crop",
+    image: coach,
   },
 ];
 
